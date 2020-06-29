@@ -1,3 +1,5 @@
+/*
+
 // fetch API
 // jsonfile -1
 const loadStudents = () => {
@@ -65,7 +67,56 @@ const loadStudents2 = () => {
 
 
 document.getElementById("btn2").addEventListener("click", loadStudents2);
+*/
 
+// refactoring
+const classes = (method, path) => {
+    return fetch(path)
+    .then((res) => {
+        return res.json();  
+    })
+    .then((students) => {
+        let output = '';
+           
+            for (let i in students) {
+             output += `
+                <ul>
+                <li> ID: ${students[i].id} </li>
+                <li> Name: ${students[i].name} </li>
+                <li> STD: ${students[i].STD} </li>
+                <li> Address: ${students[i].Adress} </li>
+                <li> fathersName: ${students[i].Fathers_Name} </li>
+                <li> phoneNumber: ${students[i].Phone_Number} </li>
+                </ul>
+                `
+            }
+
+            document.getElementById("stds").innerHTML = output;
+    })
+    .catch((error) => console.error(error))
+}
+
+
+// fetch API
+// jsonfile -1
+const loadStudents = () => {
+    const url = "./class1.json";
+    classes ("GET", url)
+    
+}
+
+
+document.getElementById("btn1").addEventListener("click", loadStudents);
+
+
+// jsonfile -1
+const loadStudents2 = () => {
+    const url = "./class2.json";
+    classes ("GET", url)
+}
+
+
+document.getElementById("btn2").addEventListener("click", loadStudents2);
 
 /*
 // class-1
